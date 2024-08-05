@@ -1,37 +1,27 @@
+import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
-import React from 'react';
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+export default () => {
+  const HomeIcon = (size: number) => <Ionicons size={size} name='home' />;
+  const SettingsIcon = (size: number) => (
+    <AntDesign size={size} name='setting' />
+  );
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
+    <Tabs>
       <Tabs.Screen
-        name="index"
+        name='home'
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ size }) => HomeIcon(size),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name='settings'
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
+          tabBarLabel: 'Settings',
+          tabBarIcon: ({ size }) => SettingsIcon(size),
         }}
       />
     </Tabs>
   );
-}
+};
